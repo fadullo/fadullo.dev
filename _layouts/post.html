@@ -1,0 +1,11 @@
+---
+layout: base
+---
+
+<article class="post-page">
+  <a class="back" href="{{ "/" | relative_url }}">Back</a>
+  <h1>{{ page.title | escape }}</h1>
+  {% include post_meta.html %}
+
+  {{ content }}
+</article>

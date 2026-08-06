@@ -1,0 +1,35 @@
+{% assign slider_images = include.images | default: "" | split: "|" %}
+{% assign slider_alts = include.alts | default: "" | split: "|" %}
+{% assign slider_label = include.label | default: "Project images" %}
+{% assign slider_aspect = include.aspect | default: "16 / 9" %}
+
+{% if include.images %}
+  <div class="image-slider{% if include.class %} {{ include.class }}{% endif %}" data-image-slider aria-label="{{ slider_label | escape }}" style="--slider-aspect: {{ slider_aspect }};">
+    <div class="slider-frame">
+      <div class="slider-viewport">
+        <div class="slider-track">
+          {% for image in slider_images %}
+            {% assign image_src = image | strip %}
+            {% assign image_alt = slider_alts[forloop.index0] | default: slider_label | strip %}
+            <figure class="slider-slide">
+              <img src="{{ image_src | relative_url }}" alt="{{ image_alt | escape }}">
+            </figure>
+          {% endfor %}
+        </div>
+      </div>
+
+      {% if slider_images.size > 1 %}
+        <button class="slider-button slider-button-prev" type="button" aria-label="Previous image" data-slider-prev>&lt;</button>
+        <button class="slider-button slider-button-next" type="button" aria-label="Next image" data-slider-next>&gt;</button>
+      {% endif %}
+    </div>
+
+    {% if slider_images.size > 1 %}
+      <div class="slider-dots" aria-label="Image slides">
+        {% for image in slider_images %}
+          <button type="button" aria-label="Show image {{ forloop.index }} of {{ forloop.length }}" data-slider-dot></button>
+        {% endfor %}
+      </div>
+    {% endif %}
+  </div>
+{% endif %}

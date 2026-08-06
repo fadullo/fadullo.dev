@@ -1,0 +1,18 @@
+<section class="profile" id="about">
+  <div class="identity">
+    <p class="name"><strong>{{ site.author }}</strong></p>
+    <div class="desc">
+      {{ site.description | markdownify }}
+    </div>
+  </div>
+
+  {%- if site.discord -%}
+    <div class="profile-section">
+      <strong>contact</strong>
+      <p class="discord-contact">
+        <i class="fa-brands fa-discord" aria-hidden="true"></i>
+        {{ site.discord | escape }}
+      </p>
+    </div>
+  {%- endif -%}
+</section>

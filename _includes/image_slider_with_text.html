@@ -1,0 +1,13 @@
+<div class="image-slider-with-text">
+  {% include image_slider.html images=include.images alts=include.alts label=include.label aspect=include.aspect %}
+
+  <div class="slider-side-text">
+    {% if include.title %}
+      <h3>{{ include.title | escape }}</h3>
+    {% endif %}
+
+    {% if include.text %}
+      {{ include.text | markdownify }}
+    {% endif %}
+  </div>
+</div>

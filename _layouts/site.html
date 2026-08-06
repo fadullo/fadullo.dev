@@ -1,0 +1,85 @@
+---
+layout: base
+---
+{% assign posts = site.posts %}
+{% if paginator %}
+  {% assign posts = paginator.posts %}
+{% endif %}
+
+{% capture page_toc %}
+  <h2 id="about">about</h2>
+  {% for post in posts %}
+    {% assign post_anchor = post.slug | default: post.title | slugify | prepend: "project-" %}
+    {% capture h2_with_post_anchor %}<h2 id="{{ post_anchor }}-{% endcapture %}
+    {% capture h3_with_post_anchor %}<h3 id="{{ post_anchor }}-{% endcapture %}
+    {% capture h4_with_post_anchor %}<h4 id="{{ post_anchor }}-{% endcapture %}
+    {% capture h5_with_post_anchor %}<h5 id="{{ post_anchor }}-{% endcapture %}
+    {% capture h6_with_post_anchor %}<h6 id="{{ post_anchor }}-{% endcapture %}
+    {% assign scoped_post_content = post.content
+      | replace: '<h2 id="', h2_with_post_anchor
+      | replace: '<h3 id="', h3_with_post_anchor
+      | replace: '<h4 id="', h4_with_post_anchor
+      | replace: '<h5 id="', h5_with_post_anchor
+      | replace: '<h6 id="', h6_with_post_anchor
+    %}
+    <h2 id="{{ post_anchor }}">{{ post.title | escape }}</h2>
+    {% assign post_toc = scoped_post_content
+      | replace: '<h5', '<h6'
+      | replace: '</h5', '</h6'
+      | replace: '<h4', '<h5'
+      | replace: '</h4', '</h5'
+      | replace: '<h3', '<h4'
+      | replace: '</h3', '</h4'
+      | replace: '<h2', '<h3'
+      | replace: '</h2', '</h3'
+    %}
+    {{ post_toc }}
+  {% endfor %}
+{% endcapture %}
+
+<div class="portfolio-shell">
+  <nav class="page-toc" aria-label="Table of contents" data-highlight-toc>
+    <a class="toc-logo" href="{{ "/" | relative_url }}" aria-label="{{ site.title | escape }} home">
+      <img src="{{ "/assets/images/johnny-logo.png" | relative_url }}" alt="{{ site.title | escape }}">
+    </a>
+    <strong>Table of contents</strong>
+    {% include toc.html html=page_toc sanitize=true h_min=2 h_max=5 class="toc-list" %}
+  </nav>
+
+  <div class="portfolio-home">
+    {%- include profile.html -%}
+
+    <section class="portfolio-feed" aria-label="Projects">
+      {{ content }}
+
+      {% if posts.size > 0 %}
+        {% for post in posts %}
+          {% assign post_anchor = post.slug | default: post.title | slugify | prepend: "project-" %}
+          <article class="post" id="{{ post_anchor }}">
+            <h2>{{ post.title | escape }}</h2>
+            {% include post_meta.html item=post %}
+            <div class="post-content">
+              {% capture h2_with_post_anchor %}<h2 id="{{ post_anchor }}-{% endcapture %}
+              {% capture h3_with_post_anchor %}<h3 id="{{ post_anchor }}-{% endcapture %}
+              {% capture h4_with_post_anchor %}<h4 id="{{ post_anchor }}-{% endcapture %}
+              {% capture h5_with_post_anchor %}<h5 id="{{ post_anchor }}-{% endcapture %}
+              {% capture h6_with_post_anchor %}<h6 id="{{ post_anchor }}-{% endcapture %}
+              {% assign scoped_post_content = post.content
+                | replace: '<h2 id="', h2_with_post_anchor
+                | replace: '<h3 id="', h3_with_post_anchor
+                | replace: '<h4 id="', h4_with_post_anchor
+                | replace: '<h5 id="', h5_with_post_anchor
+                | replace: '<h6 id="', h6_with_post_anchor
+              %}
+              {{ scoped_post_content }}
+            </div>
+          </article>
+        {% endfor %}
+      {% else %}
+        <p class="empty-note">No projects yet...</p>
+      {% endif %}
+    </section>
+  </div>
+</div>
+
+<script src="{{ "/assets/js/toc-highlight.js" | relative_url }}" defer></script>

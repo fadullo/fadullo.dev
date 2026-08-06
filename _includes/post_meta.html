@@ -1,0 +1,26 @@
+{% assign meta_item = include.item | default: page %}
+{% assign meta_date = include.date | default: meta_item.date %}
+{% assign meta_tags = include.tags | default: meta_item.tags %}
+{% assign date_format = site.minima.date_format | default: "%b %-d, %Y" %}
+
+<div class="post-meta">
+  {% if meta_date %}
+    <span class="meta-date">
+      <i class="fa-regular fa-calendar-days" aria-hidden="true"></i>
+      <span>{{ meta_date | date: date_format }}</span>
+    </span>
+  {% endif %}
+
+  {% if meta_tags and meta_tags.size > 0 %}
+    {% assign tags_list = meta_tags | join: "||" | split: "||" %}
+    <span class="meta-tags" aria-label="Tags">
+      <i class="fa-solid fa-tags" aria-hidden="true"></i>
+      {% for tag in tags_list %}
+        {% assign clean_tag = tag | strip %}
+        {% if clean_tag != "" %}
+          <span class="tag-pill">{{ clean_tag }}</span>
+        {% endif %}
+      {% endfor %}
+    </span>
+  {% endif %}
+</div>

@@ -1,0 +1,25 @@
+title: johnny
+author: johnny
+description: |-
+  I am a 19 years old developer with 6 years of experience, numerous projects and commissions under my belt. I provide maximum efficiency, optimization, and orgnization. I strive to be humble and offer quality builds with fair pricing (open to negotations).
+
+  **Payment preference:** I prefer being paid first via PayPal only, before I send the work, but I am open to a middleman if needed.
+
+  **Note:** This website is a work in progress, I am still collection all my projects.
+
+discord: fadullo
+url: "https://fadullo.ca"
+baseurl: ""
+markdown: kramdown
+highlighter: rouge
+kramdown:
+  syntax_highlighter: rouge
+  syntax_highlighter_opts:
+    block:
+      line_numbers: true
+defaults:
+  - scope:
+      path: ""
+      type: posts
+    values:
+      layout: post

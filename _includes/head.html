@@ -6,6 +6,9 @@
   {% assign meta_title = page.title | default: site.title %}
   {% assign meta_description = page.link_preview_description | default: site.link_preview_description | default: page.description | default: page.excerpt | default: site.description | markdownify | strip_html | normalize_whitespace | truncate: 180 %}
   {% assign meta_image = page.image | default: site.image | default: "/assets/images/johnny-logo.png" %}
+  {% assign meta_image_width = page.image_width | default: site.image_width %}
+  {% assign meta_image_height = page.image_height | default: site.image_height %}
+  {% assign meta_card = page.link_preview_card | default: site.link_preview_card | default: "summary" %}
 
   <meta name="description" content="{{ meta_description | escape }}">
   <meta property="og:type" content="{% if page.layout == 'post' %}article{% else %}website{% endif %}">
@@ -14,7 +17,9 @@
   <meta property="og:description" content="{{ meta_description | escape }}">
   <meta property="og:url" content="{{ page.url | absolute_url }}">
   <meta property="og:image" content="{{ meta_image | absolute_url }}">
-  <meta name="twitter:card" content="summary_large_image">
+  {% if meta_image_width %}<meta property="og:image:width" content="{{ meta_image_width }}">{% endif %}
+  {% if meta_image_height %}<meta property="og:image:height" content="{{ meta_image_height }}">{% endif %}
+  <meta name="twitter:card" content="{{ meta_card }}">
   <meta name="twitter:title" content="{{ meta_title | escape }}">
   <meta name="twitter:description" content="{{ meta_description | escape }}">
   <meta name="twitter:image" content="{{ meta_image | absolute_url }}">

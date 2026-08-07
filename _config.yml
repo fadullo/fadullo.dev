@@ -10,8 +10,11 @@ description: |-
 discord: fadullo
 url: "https://fadullo.dev"
 baseurl: ""
-image: /assets/images/johnny-logo.png
-link_preview_description: johnny - professional developer
+image: /assets/images/johnny-logo-preview.png
+image_width: 512
+image_height: 512
+link_preview_card: summary
+link_preview_description: johnny - developer
 markdown: kramdown
 highlighter: rouge
 kramdown:

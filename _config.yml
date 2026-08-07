@@ -11,6 +11,7 @@ discord: fadullo
 url: "https://fadullo.dev"
 baseurl: ""
 image: /assets/images/johnny-logo.png
+link_preview_description: johnny - professional developer
 markdown: kramdown
 highlighter: rouge
 kramdown:

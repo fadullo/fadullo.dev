@@ -4,7 +4,7 @@
 
   <title>{% if page.title %}{{ page.title }} | {% endif %}{{ site.title }}</title>
   {% assign meta_title = page.title | default: site.title %}
-  {% assign meta_description = page.description | default: page.excerpt | default: site.description | markdownify | strip_html | normalize_whitespace | truncate: 180 %}
+  {% assign meta_description = page.link_preview_description | default: site.link_preview_description | default: page.description | default: page.excerpt | default: site.description | markdownify | strip_html | normalize_whitespace | truncate: 180 %}
   {% assign meta_image = page.image | default: site.image | default: "/assets/images/johnny-logo.png" %}
 
   <meta name="description" content="{{ meta_description | escape }}">

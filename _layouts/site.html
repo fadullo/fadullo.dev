@@ -5,35 +5,53 @@ layout: base
 {% if paginator %}
   {% assign posts = paginator.posts %}
 {% endif %}
+{% assign default_project_category = site.default_project_category | default: "other" %}
 
 {% capture page_toc %}
   <h2 id="about">about</h2>
-  {% for post in posts %}
-    {% assign post_anchor = post.slug | default: post.title | slugify | prepend: "project-" %}
-    {% capture h2_with_post_anchor %}<h2 id="{{ post_anchor }}-{% endcapture %}
-    {% capture h3_with_post_anchor %}<h3 id="{{ post_anchor }}-{% endcapture %}
-    {% capture h4_with_post_anchor %}<h4 id="{{ post_anchor }}-{% endcapture %}
-    {% capture h5_with_post_anchor %}<h5 id="{{ post_anchor }}-{% endcapture %}
-    {% capture h6_with_post_anchor %}<h6 id="{{ post_anchor }}-{% endcapture %}
-    {% assign scoped_post_content = post.content
-      | replace: '<h2 id="', h2_with_post_anchor
-      | replace: '<h3 id="', h3_with_post_anchor
-      | replace: '<h4 id="', h4_with_post_anchor
-      | replace: '<h5 id="', h5_with_post_anchor
-      | replace: '<h6 id="', h6_with_post_anchor
-    %}
-    <h2 id="{{ post_anchor }}">{{ post.title | escape }}</h2>
-    {% assign post_toc = scoped_post_content
-      | replace: '<h5', '<h6'
-      | replace: '</h5', '</h6'
-      | replace: '<h4', '<h5'
-      | replace: '</h4', '</h5'
-      | replace: '<h3', '<h4'
-      | replace: '</h3', '</h4'
-      | replace: '<h2', '<h3'
-      | replace: '</h2', '</h3'
-    %}
-    {{ post_toc }}
+  {% for category in site.project_categories %}
+    {% assign category_slug = category.slug | default: category.title | slugify %}
+    {% assign category_title = category.title | default: category.slug %}
+    {% assign category_has_posts = false %}
+    {% for post in posts %}
+      {% assign post_category = post.project_category | default: default_project_category | slugify %}
+      {% if post_category == category_slug %}
+        {% assign category_has_posts = true %}
+      {% endif %}
+    {% endfor %}
+    {% if category_has_posts %}
+      <h2 id="category-{{ category_slug }}">{{ category_title | escape }}</h2>
+      {% for post in posts %}
+        {% assign post_category = post.project_category | default: default_project_category | slugify %}
+        {% if post_category == category_slug %}
+          {% assign post_anchor = post.slug | default: post.title | slugify | prepend: "project-" %}
+          {% capture h2_with_post_anchor %}<h2 id="{{ post_anchor }}-{% endcapture %}
+          {% capture h3_with_post_anchor %}<h3 id="{{ post_anchor }}-{% endcapture %}
+          {% capture h4_with_post_anchor %}<h4 id="{{ post_anchor }}-{% endcapture %}
+          {% capture h5_with_post_anchor %}<h5 id="{{ post_anchor }}-{% endcapture %}
+          {% capture h6_with_post_anchor %}<h6 id="{{ post_anchor }}-{% endcapture %}
+          {% assign scoped_post_content = post.content
+            | replace: '<h2 id="', h2_with_post_anchor
+            | replace: '<h3 id="', h3_with_post_anchor
+            | replace: '<h4 id="', h4_with_post_anchor
+            | replace: '<h5 id="', h5_with_post_anchor
+            | replace: '<h6 id="', h6_with_post_anchor
+          %}
+          <h3 id="{{ post_anchor }}">{{ post.title | escape }}</h3>
+          {% assign post_toc = scoped_post_content
+            | replace: '<h5', '<h6'
+            | replace: '</h5', '</h6'
+            | replace: '<h4', '<h6'
+            | replace: '</h4', '</h6'
+            | replace: '<h3', '<h5'
+            | replace: '</h3', '</h5'
+            | replace: '<h2', '<h4'
+            | replace: '</h2', '</h4'
+          %}
+          {{ post_toc }}
+        {% endif %}
+      {% endfor %}
+    {% endif %}
   {% endfor %}
 {% endcapture %}
 
@@ -53,27 +71,46 @@ layout: base
       {{ content }}
 
       {% if posts.size > 0 %}
-        {% for post in posts %}
-          {% assign post_anchor = post.slug | default: post.title | slugify | prepend: "project-" %}
-          <article class="post" id="{{ post_anchor }}">
-            <h2>{{ post.title | escape }}</h2>
-            {% include post_meta.html item=post %}
-            <div class="post-content">
-              {% capture h2_with_post_anchor %}<h2 id="{{ post_anchor }}-{% endcapture %}
-              {% capture h3_with_post_anchor %}<h3 id="{{ post_anchor }}-{% endcapture %}
-              {% capture h4_with_post_anchor %}<h4 id="{{ post_anchor }}-{% endcapture %}
-              {% capture h5_with_post_anchor %}<h5 id="{{ post_anchor }}-{% endcapture %}
-              {% capture h6_with_post_anchor %}<h6 id="{{ post_anchor }}-{% endcapture %}
-              {% assign scoped_post_content = post.content
-                | replace: '<h2 id="', h2_with_post_anchor
-                | replace: '<h3 id="', h3_with_post_anchor
-                | replace: '<h4 id="', h4_with_post_anchor
-                | replace: '<h5 id="', h5_with_post_anchor
-                | replace: '<h6 id="', h6_with_post_anchor
-              %}
-              {{ scoped_post_content }}
-            </div>
-          </article>
+        {% for category in site.project_categories %}
+          {% assign category_slug = category.slug | default: category.title | slugify %}
+          {% assign category_title = category.title | default: category.slug %}
+          {% assign category_has_posts = false %}
+          {% for post in posts %}
+            {% assign post_category = post.project_category | default: default_project_category | slugify %}
+            {% if post_category == category_slug %}
+              {% assign category_has_posts = true %}
+            {% endif %}
+          {% endfor %}
+          {% if category_has_posts %}
+            <section class="project-category" id="category-{{ category_slug }}">
+              <h2 class="project-category-title">{{ category_title | escape }}</h2>
+              {% for post in posts %}
+                {% assign post_category = post.project_category | default: default_project_category | slugify %}
+                {% if post_category == category_slug %}
+                  {% assign post_anchor = post.slug | default: post.title | slugify | prepend: "project-" %}
+                  <article class="post" id="{{ post_anchor }}">
+                    <h2>{{ post.title | escape }}</h2>
+                    {% include post_meta.html item=post %}
+                    <div class="post-content">
+                      {% capture h2_with_post_anchor %}<h2 id="{{ post_anchor }}-{% endcapture %}
+                      {% capture h3_with_post_anchor %}<h3 id="{{ post_anchor }}-{% endcapture %}
+                      {% capture h4_with_post_anchor %}<h4 id="{{ post_anchor }}-{% endcapture %}
+                      {% capture h5_with_post_anchor %}<h5 id="{{ post_anchor }}-{% endcapture %}
+                      {% capture h6_with_post_anchor %}<h6 id="{{ post_anchor }}-{% endcapture %}
+                      {% assign scoped_post_content = post.content
+                        | replace: '<h2 id="', h2_with_post_anchor
+                        | replace: '<h3 id="', h3_with_post_anchor
+                        | replace: '<h4 id="', h4_with_post_anchor
+                        | replace: '<h5 id="', h5_with_post_anchor
+                        | replace: '<h6 id="', h6_with_post_anchor
+                      %}
+                      {{ scoped_post_content }}
+                    </div>
+                  </article>
+                {% endif %}
+              {% endfor %}
+            </section>
+          {% endif %}
         {% endfor %}
       {% else %}
         <p class="empty-note">No projects yet...</p>

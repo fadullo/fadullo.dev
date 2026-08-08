@@ -10,24 +10,44 @@
         <div class="slider-track">
           {% for image in slider_images %}
             {% assign image_src = image | strip %}
+            {% assign image_src_lower = image_src | downcase %}
             {% assign image_alt = slider_alts[forloop.index0] | default: slider_label | strip %}
+            {% assign is_video = false %}
+            {% assign video_type = "" %}
+            {% if image_src_lower contains ".mp4" %}
+              {% assign is_video = true %}
+              {% assign video_type = "video/mp4" %}
+            {% elsif image_src_lower contains ".webm" %}
+              {% assign is_video = true %}
+              {% assign video_type = "video/webm" %}
+            {% elsif image_src_lower contains ".ogv" or image_src_lower contains ".ogg" %}
+              {% assign is_video = true %}
+              {% assign video_type = "video/ogg" %}
+            {% endif %}
             <figure class="slider-slide">
-              <img src="{{ image_src | relative_url }}" alt="{{ image_alt | escape }}">
+              {% if is_video %}
+                <video controls playsinline preload="metadata" aria-label="{{ image_alt | escape }}">
+                  <source src="{{ image_src | relative_url }}" type="{{ video_type }}">
+                  Your browser does not support embedded video.
+                </video>
+              {% else %}
+                <img src="{{ image_src | relative_url }}" alt="{{ image_alt | escape }}"{% if image_src_lower contains ".gif" %} data-slider-gif="true"{% endif %}>
+              {% endif %}
             </figure>
           {% endfor %}
         </div>
       </div>
 
       {% if slider_images.size > 1 %}
-        <button class="slider-button slider-button-prev" type="button" aria-label="Previous image" data-slider-prev>&lt;</button>
-        <button class="slider-button slider-button-next" type="button" aria-label="Next image" data-slider-next>&gt;</button>
+        <button class="slider-button slider-button-prev" type="button" aria-label="Previous slide" data-slider-prev>&lt;</button>
+        <button class="slider-button slider-button-next" type="button" aria-label="Next slide" data-slider-next>&gt;</button>
       {% endif %}
     </div>
 
     {% if slider_images.size > 1 %}
       <div class="slider-dots" aria-label="Image slides">
         {% for image in slider_images %}
-          <button type="button" aria-label="Show image {{ forloop.index }} of {{ forloop.length }}" data-slider-dot></button>
+          <button type="button" aria-label="Show slide {{ forloop.index }} of {{ forloop.length }}" data-slider-dot></button>
         {% endfor %}
       </div>
     {% endif %}

@@ -3,7 +3,7 @@ author: johnny
 description: |-
   I am a 19 years old developer with 6 years of experience, numerous projects and commissions under my belt. I provide maximum efficiency, optimization, and orgnization. I strive to be humble and offer quality builds with fair pricing (open to negotations).
 
-  **Payment preference:** I prefer being paid first via PayPal only, before I send the work, but I am open to a middleman if needed.
+  **Payment preference:** USD via PayPal.
 
   **Note:** This website is a work in progress, I am still collecting all my projects.
 
@@ -15,13 +15,25 @@ image_width: 512
 image_height: 512
 link_preview_card: summary
 link_preview_description: johnny - developer
+default_project_category: other
+project_categories:
+  - slug: open-source
+    title: open-source
+  - slug: building
+    title: building
+  - slug: front-end-scripting
+    title: front-end scripting
+  - slug: back-end-scripting
+    title: back-end scripting
+  - slug: other
+    title: other
 markdown: kramdown
 highlighter: rouge
 kramdown:
   syntax_highlighter: rouge
   syntax_highlighter_opts:
     block:
-      line_numbers: true
+      line_numbers: false
 defaults:
   - scope:
       path: ""

@@ -13,14 +13,39 @@
       return;
     }
 
+    function restartGif(slide) {
+      var gif = slide.querySelector("[data-slider-gif]");
+      if (!gif) return;
+
+      var src = gif.getAttribute("src");
+      gif.setAttribute("src", "");
+
+      window.requestAnimationFrame(function () {
+        gif.setAttribute("src", src);
+      });
+    }
+
+    function pauseVideos(slide) {
+      slide.querySelectorAll("video").forEach(function (video) {
+        video.pause();
+      });
+    }
+
     function showSlide(index) {
+      var previousIndex = activeIndex;
       activeIndex = (index + slides.length) % slides.length;
       track.style.transform = "translateX(-" + activeIndex * 100 + "%)";
+
+      if (previousIndex !== activeIndex) {
+        pauseVideos(slides[previousIndex]);
+      }
 
       dots.forEach(function (dot, dotIndex) {
         dot.classList.toggle("is-active", dotIndex === activeIndex);
         dot.setAttribute("aria-current", dotIndex === activeIndex ? "true" : "false");
       });
+
+      restartGif(slides[activeIndex]);
     }
 
     if (prev) {

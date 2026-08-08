@@ -17,12 +17,19 @@
   function setActive() {
     var active = targets[0];
     var threshold = 130;
+    var atPageBottom =
+      window.innerHeight + window.scrollY >=
+      document.documentElement.scrollHeight - 2;
 
-    targets.forEach(function (item) {
-      if (item.target.getBoundingClientRect().top <= threshold) {
-        active = item;
-      }
-    });
+    if (atPageBottom) {
+      active = targets[targets.length - 1];
+    } else {
+      targets.forEach(function (item) {
+        if (item.target.getBoundingClientRect().top <= threshold) {
+          active = item;
+        }
+      });
+    }
 
     links.forEach(function (link) {
       link.classList.toggle("is-active", link === active.link);

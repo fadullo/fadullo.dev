@@ -81,6 +81,22 @@
 .portfolio-feed {
   width: 100%;
   max-width: 720px;
+  padding-bottom: 72px;
+}
+
+.project-category {
+  margin-bottom: 52px;
+  scroll-margin-top: 36px;
+}
+
+.project-category:last-child {
+  margin-bottom: 0;
+}
+
+.project-category-title {
+  margin: 0 0 8px;
+  font-size: 18pt;
+  line-height: 1.2;
 }
 
 .post {
@@ -155,11 +171,20 @@
   margin: 0;
 }
 
-.slider-slide img {
+.slider-slide img,
+.slider-slide video {
   display: block;
   width: 100%;
   height: 100%;
+}
+
+.slider-slide img {
   object-fit: cover;
+}
+
+.slider-slide video {
+  background: #000;
+  object-fit: contain;
 }
 
 .slider-button {

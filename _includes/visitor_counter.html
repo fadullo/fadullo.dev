@@ -1,0 +1,16 @@
+{% assign counter_namespace = site.visitor_counter_namespace | default: "portfolio" %}
+{% assign counter_name = site.visitor_counter_name | default: "visitors" %}
+{% assign counter_hosts = site.visitor_counter_hosts | join: "," %}
+
+<div
+  class="visitor-counter"
+  data-visitor-counter
+  data-counter-namespace="{{ counter_namespace | escape }}"
+  data-counter-name="{{ counter_name | escape }}"
+  data-counter-hosts="{{ counter_hosts | escape }}"
+  data-counter-storage-key="visitor-counter-{{ counter_namespace | slugify }}-{{ counter_name | slugify }}"
+  aria-label="Portfolio visitors"
+>
+  <i class="fa-regular fa-eye" aria-hidden="true"></i>
+  <span data-visitor-count aria-live="polite">--</span>
+</div>

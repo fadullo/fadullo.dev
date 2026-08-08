@@ -70,29 +70,6 @@
   font-weight: 700;
 }
 
-.visitor-counter {
-  position: fixed;
-  bottom: 18px;
-  left: 40px;
-  z-index: 20;
-  display: inline-flex;
-  gap: 6px;
-  align-items: center;
-  color: #30343a;
-  font-size: 10pt;
-  font-weight: 700;
-  line-height: 1;
-}
-
-.visitor-counter i {
-  color: #30343a;
-  font-size: 1em;
-}
-
-.visitor-counter.is-unavailable {
-  opacity: 0.45;
-}
-
 .portfolio-home {
   display: flex;
   grid-column: 2;
@@ -367,11 +344,6 @@
   .portfolio-home {
     grid-column: auto;
     gap: 42px;
-  }
-
-  .visitor-counter {
-    bottom: 14px;
-    left: 15px;
   }
 
   .wrap {

@@ -15,13 +15,6 @@ image_width: 512
 image_height: 512
 link_preview_card: summary
 link_preview_description: johnny - developer
-cloudflare_analytics_token: 5e2b064b47b94dca9e2ec7247fd7a3dc
-visitor_counter_enabled: true
-visitor_counter_namespace: fadullo-dev
-visitor_counter_name: portfolio-visitors
-visitor_counter_hosts:
-  - fadullo.dev
-  - www.fadullo.dev
 default_project_category: other
 project_categories:
   - slug: open-source

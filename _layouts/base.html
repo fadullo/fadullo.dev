@@ -7,10 +7,6 @@
       {{ content }}
     </main>
 
-    {% if site.visitor_counter_enabled %}
-      {% include visitor_counter.html %}
-      <script src="{{ "/assets/js/visitor-counter.js" | relative_url }}" defer></script>
-    {% endif %}
     <script src="{{ "/assets/js/image-slider.js" | relative_url }}" defer></script>
   </body>
 </html>

@@ -6,13 +6,21 @@
     </div>
   </div>
 
-  {%- if site.discord -%}
+  {%- if site.discord or site.gmail -%}
     <div class="profile-section">
       <strong>contact</strong>
-      <p class="discord-contact">
-        <i class="fa-brands fa-discord" aria-hidden="true"></i>
-        {{ site.discord | escape }}
-      </p>
+      {%- if site.discord -%}
+        <p class="contact-line">
+          <i class="fa-brands fa-discord" aria-hidden="true"></i>
+          {{ site.discord | escape }}
+        </p>
+      {%- endif -%}
+      {%- if site.gmail -%}
+        <p class="contact-line">
+          <i class="fa-solid fa-envelope" aria-hidden="true"></i>
+          {{ site.gmail | escape }}
+        </p>
+      {%- endif -%}
     </div>
   {%- endif -%}
 </section>

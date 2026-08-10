@@ -1,0 +1,20 @@
+{% if site.availability_week %}
+  <section class="availability-week" aria-label="Weekly availability">
+    <strong class="availability-title">availability</strong>
+
+    <div class="availability-grid">
+      {% for item in site.availability_week %}
+        {% assign status = item.status | default: "offline" | slugify %}
+        <div class="availability-day status-{{ status }}" title="{{ item.day }}: {{ status | replace: "-", " " }}">
+          <span>{{ item.day }}</span>
+        </div>
+      {% endfor %}
+    </div>
+
+    <div class="availability-legend" aria-label="Availability legend">
+      <span><i class="legend-swatch status-online"></i> online</span>
+      <span><i class="legend-swatch status-messages"></i> messages</span>
+      <span><i class="legend-swatch status-offline"></i> offline</span>
+    </div>
+  </section>
+{% endif %}

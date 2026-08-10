@@ -17,6 +17,59 @@ body {
   flex-direction: column;
 }
 
+.wrap {
+  position: relative;
+  z-index: 1;
+}
+
+.tree-decoration {
+  position: fixed;
+  z-index: 0;
+  pointer-events: none;
+  background-image: url("/assets/images/tree-branch.png");
+  background-repeat: no-repeat;
+  background-size: contain;
+  opacity: 0.14;
+}
+
+.tree-decoration-left {
+  top: 28px;
+  left: -420px;
+  width: 860px;
+  height: 560px;
+  transform: scaleX(-1) rotate(-8deg);
+  transform-origin: center;
+}
+
+.tree-decoration-right {
+  top: 18px;
+  right: -380px;
+  width: 920px;
+  height: 600px;
+  transform: rotate(7deg);
+  transform-origin: center;
+}
+
+.tree-decoration-lower-left {
+  bottom: -120px;
+  left: -330px;
+  width: 690px;
+  height: 450px;
+  opacity: 0.1;
+  transform: scaleX(-1) rotate(17deg);
+  transform-origin: center;
+}
+
+.tree-decoration-lower-right {
+  right: -300px;
+  bottom: -135px;
+  width: 720px;
+  height: 470px;
+  opacity: 0.1;
+  transform: rotate(-14deg);
+  transform-origin: center;
+}
+
 img {
   max-width: 100%;
 }
@@ -29,4 +82,10 @@ a {
 a:hover {
   color: #000;
   text-decoration: underline;
+}
+
+@media (max-width: 1300px) {
+  .tree-decoration {
+    display: none;
+  }
 }

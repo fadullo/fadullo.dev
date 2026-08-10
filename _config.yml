@@ -7,6 +7,7 @@ description: |-
 
   **Note:** This website is a work in progress, I am still collecting all my projects.
 
+gmail: jsfadullo@gmail.com
 discord: fadullo
 url: "https://fadullo.dev"
 baseurl: ""
@@ -27,6 +28,21 @@ project_categories:
     title: back-end scripting
   - slug: other
     title: other
+availability_week:
+  - day: Mon
+    status: online
+  - day: Tue
+    status: online
+  - day: Wed
+    status: online
+  - day: Thu
+    status: online
+  - day: Fri
+    status: messages
+  - day: Sat
+    status: messages
+  - day: Sun
+    status: offline
 markdown: kramdown
 highlighter: rouge
 kramdown:

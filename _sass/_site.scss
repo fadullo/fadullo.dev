@@ -70,6 +70,78 @@
   font-weight: 700;
 }
 
+.availability-week {
+  width: 280px;
+  margin-top: 58px;
+  color: #30343a;
+}
+
+.availability-title {
+  display: block;
+  margin-bottom: 8px;
+  font-weight: 700;
+}
+
+.availability-grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 3px;
+  width: 100%;
+}
+
+.availability-day {
+  display: grid;
+  place-items: center;
+  aspect-ratio: 1;
+  border: 1px solid #d9d9d9;
+  background: rgba(255, 255, 255, 0.52);
+  border-radius: 4px;
+  color: #30343a;
+  font-size: 8pt;
+  font-weight: 700;
+  line-height: 1;
+}
+
+.availability-day.status-online,
+.legend-swatch.status-online {
+  border-color: #4c8d34;
+  background: #5ca13d;
+  color: #fff;
+}
+
+.availability-day.status-messages,
+.legend-swatch.status-messages {
+  border-color: #d69038;
+  background: #eba552;
+  color: #fff;
+}
+
+.availability-day.status-offline,
+.legend-swatch.status-offline {
+  background: rgba(255, 255, 255, 0.4);
+}
+
+.availability-legend {
+  display: grid;
+  gap: 5px;
+  margin-top: 8px;
+  font-size: 8.5pt;
+  line-height: 1.2;
+}
+
+.availability-legend span {
+  display: inline-flex;
+  gap: 6px;
+  align-items: center;
+}
+
+.legend-swatch {
+  flex: 0 0 auto;
+  width: 10px;
+  height: 10px;
+  border: 1px solid #d9d9d9;
+}
+
 .portfolio-home {
   display: flex;
   grid-column: 2;
@@ -337,6 +409,11 @@
     max-width: 720px;
     margin: 0 auto 36px;
     overflow: visible;
+  }
+
+  .availability-week {
+    width: min(100%, 320px);
+    margin-top: 28px;
   }
 }
 

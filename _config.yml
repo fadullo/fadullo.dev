@@ -15,7 +15,7 @@ image: /assets/images/johnny-logo-preview.png
 image_width: 512
 image_height: 512
 link_preview_card: summary
-link_preview_description: johnny - developer
+link_preview_description: johnny - roblox developer
 default_project_category: other
 project_categories:
   - slug: open-source
@@ -40,7 +40,7 @@ availability_week:
   - day: Fri
     status: messages
   - day: Sat
-    status: messages
+    status: offline
   - day: Sun
     status: offline
 markdown: kramdown
